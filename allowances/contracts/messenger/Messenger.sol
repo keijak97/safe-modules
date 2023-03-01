@@ -367,6 +367,11 @@ contract Messenger is Encoder {
         return SOLANA_CHAIN_ID;
     }
 
+    function getTotalFee() external view returns (uint256){
+        uint256 wormholeFee = _wormhole.messageFee();
+        return wormholeFee + _arbiter_fee;
+    }
+
     function changeSolanaWormholeId(uint256 _id) public {
         require(msg.sender == owner, "Only owner can change wormhole id for Solana!");
         SOLANA_CHAIN_ID = _id;
